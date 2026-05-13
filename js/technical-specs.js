@@ -1,5 +1,5 @@
 (() => {
-     const INDIA_FLAG = '&#x1F1EE;&#x1F1F3;';
+     const INDIA_FLAG = '<img src="./assets/images/icons/icon-nationalFlag.png" alt="" loading="lazy" decoding="async" />';
 
      const TECHNICAL_SPEC_ROWS = [
           {

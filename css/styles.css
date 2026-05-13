@@ -930,8 +930,19 @@ footer>* {
 }
 
 .technical-specs__country-flag {
-     display: inline-block;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     width: 20px;
+     height: 14px;
      margin-right: 8px;
+}
+
+.technical-specs__country-flag img {
+     width: 100%;
+     height: 100%;
+     display: block;
+     object-fit: contain;
 }
 
 .technical-specs__actions {
@@ -968,6 +979,9 @@ footer>* {
 
 .technical-specs__download-icon {
      flex: 0 0 auto;
+     width: 16px;
+     height: 16px;
+     object-fit: contain;
 }
 
 /* ─── Built To Last ───────────────────────────────────────────────────────── */
@@ -1044,10 +1058,12 @@ footer>* {
      color: #3447B7;
 }
 
-.built-to-last__icon svg {
+.built-to-last__icon svg,
+.built-to-last__icon img {
      display: block;
      width: 100%;
      height: 100%;
+     object-fit: contain;
 }
 
 .built-to-last__card-title {
@@ -1170,9 +1186,12 @@ footer>* {
      background: rgba(52, 71, 183, 0.12);
 }
 
-.faq-item__icon svg {
+.faq-item__icon svg,
+.faq-item__icon img {
      width: 14px;
      height: 14px;
+     display: block;
+     object-fit: contain;
 }
 
 .faq-item__panel {
@@ -1693,9 +1712,9 @@ footer>* {
 
 .resources-downloads__header h2 {
      margin: 0;
-     color: #111827;
+     color: #0D0D0D;
      font-family: "Urbanist", sans-serif;
-     font-size: clamp(32px, 3.1vw, 56px);
+     font-size: 44px;
      font-weight: 700;
      line-height: 1.08;
      letter-spacing: -0.02em;
@@ -1704,19 +1723,19 @@ footer>* {
 .resources-downloads__header p {
      margin: 0;
      max-width: 56ch;
-     color: #6B7280;
+     color: #4D545C;
      font-family: "Inter", sans-serif;
-     font-size: 17px;
+     font-size: 18px;
      font-weight: 400;
      line-height: 1.55;
 }
 
 .resources-downloads__card {
-     padding: 16px 20px;
+     padding: 20px;
      border: 1px solid #CFD1D4;
      border-radius: 16px;
-     background: rgba(255, 255, 255, 0.94);
-     box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+     background: #FFFFFF;
+     box-shadow: 0px 2px 4px 0px #1B1C1D0A;
 }
 
 .resources-downloads__list {
@@ -1728,7 +1747,7 @@ footer>* {
 }
 
 .resources-downloads__row {
-     min-height: 66px;
+     min-height: 12px;
      padding: 0 4px;
      display: flex;
      align-items: center;
@@ -1738,15 +1757,11 @@ footer>* {
      transition: background-color 180ms ease;
 }
 
-.resources-downloads__row:hover {
-     background: rgba(243, 244, 246, 0.8);
-}
-
 .resources-downloads__title {
      margin: 0;
-     color: #111827;
+     color: #0D0D0D;
      font-family: "Inter", sans-serif;
-     font-size: 19px;
+     font-size: 16px;
      font-weight: 500;
      line-height: 1.35;
 }
@@ -1763,7 +1778,7 @@ footer>* {
      color: #2B3990;
      font-family: "Inter", sans-serif;
      font-size: 16px;
-     font-weight: 600;
+     font-weight: 500;
      line-height: 1;
      cursor: pointer;
      border-radius: 8px;
@@ -1786,9 +1801,12 @@ footer>* {
      justify-content: center;
 }
 
-.resources-downloads__icon svg {
+.resources-downloads__icon svg,
+.resources-downloads__icon img {
      width: 100%;
      height: 100%;
+     display: block;
+     object-fit: contain;
 }
 
 /* ─── Solutions Portfolio ─────────────────────────────────────────────────── */
@@ -1980,9 +1998,12 @@ footer>* {
      justify-content: center;
 }
 
-.solutions-portfolio__help-icon svg {
+.solutions-portfolio__help-icon svg,
+.solutions-portfolio__help-icon img {
      width: 100%;
      height: 100%;
+     display: block;
+     object-fit: contain;
 }
 
 /* ─── Trusted Performance ─────────────────────────────────────────────────── */

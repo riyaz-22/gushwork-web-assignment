@@ -20,13 +20,7 @@
      const list = root.querySelector('[data-resources-list]');
      if (!list) return;
 
-     const downloadIcon = `
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-               <path d="M12 4v10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
-               <path d="m7.5 10.5 4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-               <path d="M5 18.5h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
-          </svg>
-     `;
+     const iconDownload = `<img src="./assets/images/icons/icon-download.png" alt="" loading="lazy" decoding="async" />`;
 
      list.innerHTML = DOWNLOAD_RESOURCES.map((resource, index) => {
           return `
@@ -34,7 +28,7 @@
                     <p class="resources-downloads__title">${resource.title}</p>
                     <button class="resources-downloads__action" type="button" data-resource-index="${index}">
                          <span>Download PDF</span>
-                         <span class="resources-downloads__icon">${downloadIcon}</span>
+                         <span class="resources-downloads__icon">${iconDownload}</span>
                     </button>
                </li>
           `;

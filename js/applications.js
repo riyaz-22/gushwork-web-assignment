@@ -33,13 +33,6 @@
 
      const bgUrl = './assets/images/backgrounds/section-information-bg.png';
 
-     const iconMarkup = `
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-               <path d="M12 5v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-               <path d="M6.5 10.5 12 5l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-     `;
-
      track.innerHTML = APPLICATION_CARDS.map(({ title, description }, index) => `
           <article class="applications-card">
                <img class="applications-card__image" src="${bgUrl}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
