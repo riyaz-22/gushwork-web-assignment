@@ -25,13 +25,6 @@
 
      <!-- Header -->
      <header class="header">
-          <div class="header-announcement" aria-hidden="true">
-               <div class="header-announcement__content">
-                    <span>Trusted Industrial Piping Since 1999</span>
-                    <a href="#" class="header-announcement__link">Get Technical Support</a>
-               </div>
-          </div>
-
           <nav class="navbar" aria-label="Primary">
                <a class="logo" href="#main-content" aria-label="Mangalam Pipes home">
                     <img src="./assets/images/logo/logo-mangalam-pipes.png" alt="Mangalam Pipes Logo" />
@@ -213,11 +206,44 @@
                </section>
           </section>
 
-          <section class="technical-specs-placeholder" id="technical-specs-placeholder"
-               aria-labelledby="technical-specs-title">
-               <div class="container">
-                    <h2 id="technical-specs-title">Technical Specs</h2>
-                    <p>Section placeholder. Detailed technical specifications will be added here.</p>
+          <section class="technical-specs" id="technical-specs-placeholder" aria-labelledby="technical-specs-title">
+               <div class="container technical-specs__container">
+                    <header class="technical-specs__header">
+                         <h2 id="technical-specs-title">Technical Specifications at a Glance</h2>
+                         <p>
+                              Comprehensive performance data demonstrating our commitment to quality and engineering
+                              excellence.
+                         </p>
+                    </header>
+
+                    <div class="technical-specs__table-shell" role="region" aria-label="Technical specification table">
+                         <table class="technical-specs__table">
+                              <thead>
+                                   <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Specification</th>
+                                   </tr>
+                              </thead>
+                              <tbody data-technical-spec-rows></tbody>
+                         </table>
+                    </div>
+
+                    <div class="technical-specs__actions">
+                         <button class="technical-specs__download" type="button"
+                              aria-label="Download Full Technical Datasheet">
+                              <svg class="technical-specs__download-icon" width="16" height="16" viewBox="0 0 24 24"
+                                   fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                   <path d="M12 3V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                   <path d="M8.5 10.5L12 14L15.5 10.5" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                   <path d="M5 16.5V18.5C5 19.3284 5.67157 20 6.5 20H17.5C18.3284 20 19 19.3284 19 18.5V16.5"
+                                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                              </svg>
+                              <span>Download Full Technical Datasheet</span>
+                         </button>
+                    </div>
                </div>
           </section>
 
@@ -233,6 +259,7 @@
      <script src="./js/main.js"></script>
      <script src="./js/carousel.js"></script>
      <script src="./js/trusted-companies.js"></script>
+     <script src="./js/technical-specs.js"></script>
 </body>
 
 </html>
