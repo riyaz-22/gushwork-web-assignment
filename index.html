@@ -495,6 +495,49 @@
           </div>
      </footer>
 
+     <!-- Modal: Download Technical Datasheet -->
+     <div class="modal-overlay" id="datasheet-modal-overlay" hidden>
+          <dialog class="modal" id="datasheet-modal" aria-labelledby="datasheet-modal-title">
+               <button class="modal__close" aria-label="Close modal" type="button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                         <line x1="18" y1="6" x2="6" y2="18"></line>
+                         <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+               </button>
+
+               <div class="modal__content">
+                    <h2 id="datasheet-modal-title" class="modal__title">Let us email the entire catalogue to you</h2>
+                    
+                    <form class="modal__form" id="datasheet-form">
+                         <div class="modal__form-group">
+                              <label for="modal-email" class="modal__label">Your Email <span aria-label="required">*</span></label>
+                              <input 
+                                   type="email" 
+                                   id="modal-email" 
+                                   name="email" 
+                                   class="modal__input" 
+                                   placeholder="example@gmail.com"
+                                   required
+                              />
+                         </div>
+
+                         <div class="modal__form-group">
+                              <label for="modal-contact" class="modal__label">Your Contact (Optional)</label>
+                              <input 
+                                   type="tel" 
+                                   id="modal-contact" 
+                                   name="contact" 
+                                   class="modal__input" 
+                                   placeholder="+91-0000000000"
+                              />
+                         </div>
+
+                         <button type="submit" class="modal__submit">Download Brochure</button>
+                    </form>
+               </div>
+          </dialog>
+     </div>
+
      <!-- JavaScript -->
      <script src="./js/header.js"></script>
      <script src="./js/main.js"></script>
@@ -510,6 +553,7 @@
      <script src="./js/testimonials.js"></script>
      <script src="./js/contact-cta.js"></script>
      <script src="./js/footer.js"></script>
+     <script src="./js/modal.js"></script>
 </body>
 
 </html>

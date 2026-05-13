@@ -29,6 +29,46 @@
 
      let activeIndex = 0;
 
+     const isInteractionBlocked = () => {
+          const modalOverlay = document.querySelector('#datasheet-modal-overlay');
+          const modal = document.querySelector('#datasheet-modal');
+
+          return document.body.classList.contains('modal-open') ||
+               document.body.dataset.scrollLocked === 'true' ||
+               (Boolean(modal?.open) && Boolean(modalOverlay) && !modalOverlay.hasAttribute('hidden'));
+     };
+
+     const stopEvent = (event) => {
+          if (!event) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (typeof event.stopImmediatePropagation === 'function') {
+               event.stopImmediatePropagation();
+          }
+     };
+
+     const getThumbByEvent = (event) => {
+          const target = event.target;
+
+          if (!(target instanceof Element)) {
+               return null;
+          }
+
+          return target.closest('[data-carousel-thumb]');
+     };
+
+     const thumbHasImage = (thumb) => Boolean(thumb?.querySelector('img'));
+
+     const normalizeIndex = (index) => {
+          if (!Number.isInteger(index) || slides.length === 0) {
+               return activeIndex;
+          }
+
+          return (index + slides.length) % slides.length;
+     };
+
      /**
       * Generate thumbnail buttons dynamically based on slide count
       * Creates all thumbnails as empty placeholders - images added separately
@@ -113,56 +153,114 @@
      };
 
      const setActiveIndex = (nextIndex) => {
-          activeIndex = (nextIndex + slides.length) % slides.length;
+          if (!Number.isInteger(nextIndex) || slides.length === 0) {
+               return;
+          }
+
+          const normalizedIndex = normalizeIndex(nextIndex);
+          if (normalizedIndex === activeIndex) {
+               return;
+          }
+
+          activeIndex = normalizedIndex;
           render();
      };
 
-     prevButton?.addEventListener('click', () => {
+     prevButton?.addEventListener('click', (event) => {
+          if (isInteractionBlocked()) {
+               event.preventDefault();
+               event.stopPropagation();
+               return;
+          }
+
           setActiveIndex(activeIndex - 1);
      });
 
-     nextButton?.addEventListener('click', () => {
+     nextButton?.addEventListener('click', (event) => {
+          if (isInteractionBlocked()) {
+               event.preventDefault();
+               event.stopPropagation();
+               return;
+          }
+
           setActiveIndex(activeIndex + 1);
      });
 
-     thumbs.forEach((thumb, index) => {
-          const hasImage = () => !!thumb.querySelector('img');
+     // Capture blocked-state thumbnail interactions before any bubbling/default behavior can run.
+     thumbnailContainer?.addEventListener('pointerdown', (event) => {
+          const thumb = getThumbByEvent(event);
+          if (!thumb) return;
 
-          thumb.addEventListener('click', () => {
-               if (!hasImage()) return;
-               setActiveIndex(index);
-          });
+          if (isInteractionBlocked()) {
+               stopEvent(event);
+          }
+     }, true);
 
-          thumb.addEventListener('keydown', (event) => {
-               if (!hasImage()) return;
+     thumbnailContainer?.addEventListener('click', (event) => {
+          const thumb = getThumbByEvent(event);
+          if (!thumb) return;
 
-               if (event.key === 'ArrowRight') {
-                    event.preventDefault();
-                    const next = thumbs.slice(index + 1).find(t => t.querySelector('img'));
-                    if (next) { setActiveIndex(thumbs.indexOf(next)); next.focus(); }
-               }
+          if (isInteractionBlocked() || !event.isTrusted || event.defaultPrevented || !thumbHasImage(thumb)) {
+               stopEvent(event);
+               return;
+          }
 
-               if (event.key === 'ArrowLeft') {
-                    event.preventDefault();
-                    const prev = [...thumbs].slice(0, index).reverse().find(t => t.querySelector('img'));
-                    if (prev) { setActiveIndex(thumbs.indexOf(prev)); prev.focus(); }
-               }
+          stopEvent(event);
 
-               if (event.key === 'Home') {
-                    event.preventDefault();
-                    const first = thumbs.find(t => t.querySelector('img'));
-                    if (first) { setActiveIndex(thumbs.indexOf(first)); first.focus(); }
-               }
+          const nextIndex = Number.parseInt(thumb.getAttribute('data-index') || '', 10);
+          if (!Number.isInteger(nextIndex)) {
+               return;
+          }
 
-               if (event.key === 'End') {
-                    event.preventDefault();
-                    const last = [...thumbs].reverse().find(t => t.querySelector('img'));
-                    if (last) { setActiveIndex(thumbs.indexOf(last)); last.focus(); }
-               }
-          });
+          setActiveIndex(nextIndex);
+     });
+
+     thumbnailContainer?.addEventListener('keydown', (event) => {
+          const thumb = getThumbByEvent(event);
+          if (!thumb) return;
+
+          if (isInteractionBlocked() || !thumbHasImage(thumb)) {
+               stopEvent(event);
+               return;
+          }
+
+          const index = Number.parseInt(thumb.getAttribute('data-index') || '', 10);
+          if (!Number.isInteger(index)) {
+               stopEvent(event);
+               return;
+          }
+
+          if (event.key === 'ArrowRight') {
+               stopEvent(event);
+               const next = thumbs.slice(index + 1).find(t => thumbHasImage(t));
+               if (next) { setActiveIndex(thumbs.indexOf(next)); next.focus(); }
+          }
+
+          if (event.key === 'ArrowLeft') {
+               stopEvent(event);
+               const prev = [...thumbs].slice(0, index).reverse().find(t => thumbHasImage(t));
+               if (prev) { setActiveIndex(thumbs.indexOf(prev)); prev.focus(); }
+          }
+
+          if (event.key === 'Home') {
+               stopEvent(event);
+               const first = thumbs.find(t => thumbHasImage(t));
+               if (first) { setActiveIndex(thumbs.indexOf(first)); first.focus(); }
+          }
+
+          if (event.key === 'End') {
+               stopEvent(event);
+               const last = [...thumbs].reverse().find(t => thumbHasImage(t));
+               if (last) { setActiveIndex(thumbs.indexOf(last)); last.focus(); }
+          }
      });
 
      viewport.addEventListener('keydown', (event) => {
+          if (isInteractionBlocked()) {
+               event.preventDefault();
+               return;
+          }
+
           if (event.key === 'ArrowRight') {
                event.preventDefault();
                setActiveIndex(activeIndex + 1);
@@ -175,6 +273,11 @@
      });
 
      viewport.addEventListener('mousemove', (event) => {
+          if (isInteractionBlocked()) {
+               carousel.classList.remove('is-zooming');
+               return;
+          }
+
           const bounds = viewport.getBoundingClientRect();
           const relativeX = ((event.clientX - bounds.left) / bounds.width) * 100;
           const relativeY = ((event.clientY - bounds.top) / bounds.height) * 100;
@@ -184,6 +287,10 @@
      });
 
      viewport.addEventListener('mouseenter', () => {
+          if (isInteractionBlocked()) {
+               return;
+          }
+
           carousel.classList.add('is-zooming');
           zoomSurface.style.backgroundPosition = '50% 50%';
      });

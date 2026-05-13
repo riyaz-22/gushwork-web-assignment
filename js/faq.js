@@ -43,14 +43,24 @@
 
      accordionRoot.innerHTML = FAQ_ITEMS.map(({ question, answer, expanded }, index) => {
           const itemId = `${idBase}-${index + 1}`;
+          const isFirstItem = index === 0;
+
+          // First item: interactive button trigger; others: static div
+          const triggerElement = isFirstItem
+               ? `<button class="faq-item__trigger" type="button" aria-expanded="${expanded ? 'true' : 'false'}"
+                    aria-controls="${itemId}-panel" id="${itemId}-trigger" data-faq-trigger>
+                    <span>${question}</span>
+                    <span class="faq-item__icon" aria-hidden="true">${iconMarkup}</span>
+               </button>`
+               : `<div class="faq-item__trigger" style="cursor: default;">
+                    <span>${question}</span>
+                    <span class="faq-item__icon" aria-hidden="true">${iconMarkup}</span>
+               </div>`;
+
           return `
                <article class="faq-item${expanded ? ' is-open' : ''}" data-faq-item>
                     <h3 class="faq-item__title">
-                         <button class="faq-item__trigger" type="button" aria-expanded="${expanded ? 'true' : 'false'}"
-                              aria-controls="${itemId}-panel" id="${itemId}-trigger" data-faq-trigger>
-                              <span>${question}</span>
-                              <span class="faq-item__icon" aria-hidden="true">${iconMarkup}</span>
-                         </button>
+                         ${triggerElement}
                     </h3>
                     <div class="faq-item__panel" id="${itemId}-panel" role="region" aria-labelledby="${itemId}-trigger"
                          data-faq-panel ${expanded ? '' : 'hidden'}>
@@ -97,7 +107,7 @@
           setPanelHeight(item, true);
      };
 
-     items.forEach((item) => {
+     items.forEach((item, itemIndex) => {
           const trigger = item.querySelector('[data-faq-trigger]');
           const panel = item.querySelector('[data-faq-panel]');
           if (!trigger || !panel) return;
@@ -106,25 +116,20 @@
           panel.hidden = !isOpen;
           panel.style.maxHeight = isOpen ? `${panel.scrollHeight}px` : '0px';
 
-          trigger.addEventListener('click', () => {
-               const currentlyOpen = item.classList.contains('is-open');
+          // Only first item is interactive; rest are dummy
+          if (itemIndex === 0) {
+               trigger.addEventListener('click', () => {
+                    const currentlyOpen = item.classList.contains('is-open');
 
-               items.forEach((otherItem) => {
-                    if (otherItem !== item && otherItem.classList.contains('is-open')) {
-                         closeItem(otherItem);
-                         const otherTrigger = otherItem.querySelector('[data-faq-trigger]');
-                         if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+                    if (currentlyOpen) {
+                         closeItem(item);
+                         trigger.setAttribute('aria-expanded', 'false');
+                    } else {
+                         openItem(item);
+                         trigger.setAttribute('aria-expanded', 'true');
                     }
                });
-
-               if (currentlyOpen) {
-                    closeItem(item);
-                    trigger.setAttribute('aria-expanded', 'false');
-               } else {
-                    openItem(item);
-                    trigger.setAttribute('aria-expanded', 'true');
-               }
-          });
+          }
      });
 
      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
