@@ -21,6 +21,8 @@
 
 <body>
 
+     <a class="visually-hidden focusable-skip-link" href="#main-content">Skip to main content</a>
+
      <!-- Header -->
      <header class="header">
           <div class="header-announcement" aria-hidden="true">
@@ -30,22 +32,22 @@
                </div>
           </div>
 
-          <nav class="navbar">
-               <div class="logo">
+          <nav class="navbar" aria-label="Primary">
+               <a class="logo" href="#main-content" aria-label="Mangalam Pipes home">
                     <img src="./assets/images/logo/logo-mangalam-pipes.png" alt="Mangalam Pipes Logo" />
-               </div>
+               </a>
 
                <div class="nav-actions">
                     <ul class="nav-links">
                          <li><a href="#">About Us</a></li>
                          <li class="nav-dropdown">
                               <button class="nav-dropdown__toggle" type="button" aria-expanded="false"
-                                   aria-controls="products-menu">
+                                   aria-controls="products-menu" aria-haspopup="true">
                                    <span>Products</span>
                                    <span class="nav-dropdown__caret" aria-hidden="true"></span>
                               </button>
 
-                              <ul class="nav-dropdown__menu" id="products-menu">
+                              <ul class="nav-dropdown__menu" id="products-menu" aria-label="Products submenu" hidden>
                                    <li><a href="#">HDPE Pipes</a></li>
                                    <li><a href="#">Pipe Fittings</a></li>
                                    <li><a href="#">Coils</a></li>
@@ -60,19 +62,126 @@
      </header>
 
      <!-- Main -->
-     <main>
+     <main id="main-content">
 
           <!-- Hero Section -->
-          <section class="hero">
+          <section class="hero" aria-labelledby="hero-title">
                <div class="container">
-                    <h1>High Quality HDPE Pipes & Fittings</h1>
-                    <p>
-                         Reliable piping solutions engineered for modern infrastructure.
-                    </p>
+                    <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+                         <ol class="hero-breadcrumb__list">
+                              <li class="hero-breadcrumb__item"><a href="#">Products</a></li>
+                              <li class="hero-breadcrumb__item" aria-current="page">Two For One Twister</li>
+                         </ol>
+                    </nav>
 
-                    <button class="btn-primary">
-                         Explore Products
-                    </button>
+                    <div class="hero-layout">
+                         <section class="product-carousel" aria-label="Product image gallery" data-carousel>
+                              <h2 class="visually-hidden">Product gallery</h2>
+                              <div class="carousel-stage">
+                                   <button class="carousel-control carousel-control--prev" type="button"
+                                        aria-label="Previous image" aria-controls="carousel-track" data-carousel-prev>
+                                        <span aria-hidden="true">&#8249;</span>
+                                   </button>
+
+                                   <div class="carousel-viewport" tabindex="0" data-carousel-viewport
+                                        aria-label="Carousel preview area">
+                                        <div class="carousel-track" id="carousel-track" data-carousel-track>
+                                             <figure class="carousel-slide is-active" data-slide
+                                                  data-zoom-image="./assets/images/hero/hero-fishnet-installation.jpg">
+                                                  <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                                       alt="HDPE pipe installation worksite overview"
+                                                       decoding="async" />
+                                             </figure>
+                                             <figure class="carousel-slide" data-slide
+                                                  data-zoom-image="./assets/images/hero/hero-fishnet-installation.jpg">
+                                                  <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                                       alt="HDPE pipe handling close-up" loading="lazy"
+                                                       decoding="async" />
+                                             </figure>
+                                             <figure class="carousel-slide" data-slide
+                                                  data-zoom-image="./assets/images/hero/hero-fishnet-installation.jpg">
+                                                  <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                                       alt="HDPE coil installation activity" loading="lazy"
+                                                       decoding="async" />
+                                             </figure>
+                                        </div>
+                                        <div class="carousel-zoom-overlay" aria-hidden="true">
+                                             <div class="carousel-zoom-overlay__tile">
+                                                  <span class="carousel-zoom-overlay__icon"></span>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                                   <button class="carousel-control carousel-control--next" type="button"
+                                        aria-label="Next image" aria-controls="carousel-track" data-carousel-next>
+                                        <span aria-hidden="true">&#8250;</span>
+                                   </button>
+                              </div>
+
+                              <div class="carousel-thumbnails" role="tablist" aria-label="Product gallery thumbnails">
+                                   <button class="carousel-thumbnail is-active" type="button" data-carousel-thumb
+                                        data-index="0" aria-label="Show image 1" aria-current="true">
+                                        <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                             alt="Thumbnail for image 1" loading="lazy" decoding="async" />
+                                   </button>
+                                   <button class="carousel-thumbnail" type="button" data-carousel-thumb data-index="1"
+                                        aria-label="Show image 2">
+                                        <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                             alt="Thumbnail for image 2" loading="lazy" decoding="async" />
+                                   </button>
+                                   <button class="carousel-thumbnail" type="button" data-carousel-thumb data-index="2"
+                                        aria-label="Show image 3">
+                                        <img src="./assets/images/hero/hero-fishnet-installation.jpg"
+                                             alt="Thumbnail for image 3" loading="lazy" decoding="async" />
+                                   </button>
+                              </div>
+
+                              <p class="visually-hidden" aria-live="polite" data-carousel-status></p>
+
+                              <aside class="carousel-zoom-preview" aria-hidden="true" data-carousel-zoom-preview>
+                                   <div class="carousel-zoom-preview__surface" data-carousel-zoom-surface></div>
+                              </aside>
+                         </section>
+
+                         <div class="hero-copy">
+                              <ul class="hero-badges" aria-label="Certifications">
+                                   <li class="hero-badge">
+                                        <span class="hero-badge__icon" aria-hidden="true">
+                                             <img src="./assets/images/icons/icon-bis-certified.png" alt=""
+                                                  loading="lazy" decoding="async" />
+                                        </span>
+                                        <span>BIS Certified</span>
+                                   </li>
+                                   <li class="hero-badge">
+                                        <span class="hero-badge__icon" aria-hidden="true">
+                                             <img src="./assets/images/icons/icon-iso-certified.png" alt=""
+                                                  loading="lazy" decoding="async" />
+                                        </span>
+                                        <span>ISO Certified</span>
+                                   </li>
+                                   <li class="hero-badge">
+                                        <span class="hero-badge__icon" aria-hidden="true">
+                                             <img src="./assets/images/icons/icon-ce-certified..png" alt=""
+                                                  loading="lazy" decoding="async" />
+                                        </span>
+                                        <span>CE Certified</span>
+                                   </li>
+                              </ul>
+                              <h1 id="hero-title" class="hero-title">Premium HDPE Pipes & Coils for Modern
+                                   Infrastructure</h1>
+                              <p>
+                                   Reliable piping solutions engineered for modern infrastructure with durable pipe
+                                   systems, coils, and accessories built for demanding site conditions.
+                              </p>
+
+                              <div class="hero-actions">
+                                   <button class="btn-primary">
+                                        Explore Products
+                                   </button>
+                                   <a href="#" class="btn-secondary">Talk to Sales</a>
+                              </div>
+                         </div>
+                    </div>
                </div>
           </section>
 
@@ -86,6 +195,7 @@
      <!-- JavaScript -->
      <script src="./js/header.js"></script>
      <script src="./js/main.js"></script>
+     <script src="./js/carousel.js"></script>
 </body>
 
 </html>
