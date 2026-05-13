@@ -974,6 +974,7 @@ footer>* {
 
 .built-to-last {
      padding: var(--fold-padding-y) var(--fold-padding-x);
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -1297,6 +1298,7 @@ footer>* {
 
 .applications-section {
      padding: var(--fold-padding-y) var(--fold-padding-x);
+     border: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -1462,7 +1464,7 @@ footer>* {
 
 .manufacturing-process {
      padding: var(--fold-padding-y) var(--fold-padding-x);
-     border-bottom: 1px solid #E1E3E8;
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -1670,7 +1672,7 @@ footer>* {
 
 .resources-downloads {
      padding: var(--fold-padding-y) var(--fold-padding-x);
-     border-bottom: 1px solid #E1E3E8;
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -1793,7 +1795,7 @@ footer>* {
 
 .solutions-portfolio {
      padding: var(--fold-padding-y) var(--fold-padding-x);
-     border-bottom: 1px solid #E1E3E8;
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -1987,7 +1989,7 @@ footer>* {
 
 .trusted-performance {
      padding: var(--fold-padding-y) var(--fold-padding-x);
-     border-bottom: 1px solid #E1E3E8;
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -2152,7 +2154,7 @@ footer>* {
 
 .contact-cta {
      padding: var(--fold-padding-y) var(--fold-padding-x);
-     border-bottom: 1px solid #E1E3E8;
+     border-bottom: 1px solid #CFD1D4;
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
@@ -2180,7 +2182,7 @@ footer>* {
      margin: 0;
      color: #FFFFFF;
      font-family: "Urbanist", sans-serif;
-     font-size: clamp(38px, 3.1vw, 56px);
+     font-size: 48px;
      font-weight: 700;
      line-height: 1.08;
      letter-spacing: -0.02em;
@@ -2190,9 +2192,9 @@ footer>* {
 .contact-cta__content>p {
      margin: 0;
      max-width: 56ch;
-     color: rgba(239, 244, 255, 0.9);
+     color: #FFFFFFCC;
      font-family: "Inter", sans-serif;
-     font-size: 16px;
+     font-size: 18px;
      font-weight: 400;
      line-height: 1.6;
 }
@@ -2200,7 +2202,7 @@ footer>* {
 .contact-cta__divider {
      width: min(100%, 520px);
      height: 1px;
-     background: rgba(225, 227, 232, 0.26);
+     background: #FFFFFF33;
      margin: 8px 0 2px;
 }
 
@@ -2209,8 +2211,8 @@ footer>* {
      max-width: 62ch;
      color: rgba(239, 244, 255, 0.82);
      font-family: "Inter", sans-serif;
-     font-size: 12px;
-     font-weight: 400;
+     font-size: 14px;
+     font-weight: 700;
      line-height: 1.45;
 }
 
@@ -2248,9 +2250,9 @@ footer>* {
 
 .contact-cta__form-title {
      margin: 0;
-     color: #111827;
+     color: #262A2E;
      font-family: "Inter", sans-serif;
-     font-size: 14px;
+     font-size: 16px;
      font-weight: 500;
      line-height: 1.4;
 }
@@ -2270,10 +2272,10 @@ footer>* {
      width: 100%;
      min-height: 36px;
      height: 36px;
-     border: 1px solid #D8DCE3;
-     border-radius: 6px;
-     background: #F7F8F9;
-     color: #111827;
+     border: 1px solid #E1E3E8;
+     border-radius: 8px;
+     background: #FFFFFF;
+     color: #959BA4;
      font-family: "Inter", sans-serif;
      font-size: 13px;
      font-weight: 400;
@@ -2283,7 +2285,7 @@ footer>* {
 }
 
 .contact-cta__field input::placeholder {
-     color: #A1A8B3;
+     color: #959BA4;
 }
 
 .contact-cta__field input:hover,
@@ -2341,10 +2343,10 @@ footer>* {
      width: 100%;
      min-height: 40px;
      padding: 0 14px;
-     border-radius: 8px;
-     background: #1F2937;
+     border-radius: 10px;
+     background: #262A2E;
      color: #FFFFFF;
-     font-size: 12px;
+     font-size: 14px;
      font-weight: 500;
      line-height: 1;
 }
