@@ -48,9 +48,7 @@ body.has-sticky-header {
      position: fixed;
      top: 16px;
      left: 16px;
-     width: auto;
-     height: auto;
-     padding: 10px 14px;
+
      margin: 0;
      clip: auto;
      background: #ffffff;
@@ -305,6 +303,12 @@ footer>* {
      gap: 24px;
 }
 
+.hero-breadcrumb {
+     padding-top: 0;
+     margin-top: -40px;
+     margin-bottom: 4px;
+}
+
 .hero-breadcrumb__list {
      display: flex;
      align-items: center;
@@ -325,7 +329,7 @@ footer>* {
      letter-spacing: -0.006em;
 }
 
-.hero-breadcrumb__item + .hero-breadcrumb__item::before {
+.hero-breadcrumb__item+.hero-breadcrumb__item::before {
      content: "\203A";
      margin-right: 10px;
      color: #9ca3af;
@@ -402,6 +406,8 @@ footer>* {
      z-index: 2;
      width: 48px;
      height: 48px;
+     display: grid;
+     place-items: center;
      border: 0;
      border-radius: 999px;
      background: rgba(255, 255, 255, 0.92);
@@ -427,9 +433,23 @@ footer>* {
      right: 18px;
 }
 
-.carousel-control span {
-     font-size: 28px;
-     line-height: 1;
+.carousel-control img {
+     width: 24px;
+     height: 24px;
+     object-fit: contain;
+}
+
+.carousel-control__icon {
+     display: block;
+     width: 14px;
+     height: 14px;
+     object-fit: contain;
+     margin: 0;
+     flex: 0 0 auto;
+}
+
+.carousel-control__icon--prev {
+     transform: rotate(180deg);
 }
 
 .carousel-zoom-overlay {
@@ -495,20 +515,21 @@ footer>* {
 
 .carousel-thumbnails {
      display: flex;
-     gap: 16px;
+     gap: 12px;
+     flex-wrap: wrap;
 }
 
 .carousel-thumbnail {
-     width: 88px;
-     height: 88px;
+     width: 80px;
+     height: 80px;
      padding: 0;
-     border: 1px solid transparent;
-     border-radius: 18px;
+     border: 1px solid #e1e3e8;
+     border-radius: 8px;
      overflow: hidden;
      background: #ffffff;
-     box-shadow: 0 14px 28px -20px rgba(15, 23, 42, 0.4);
+     box-shadow: 0 1px 2px 0 #0000000d;
      cursor: pointer;
-     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+     transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .carousel-thumbnail img {
@@ -518,12 +539,43 @@ footer>* {
 }
 
 .carousel-thumbnail.is-active,
-.carousel-thumbnail:hover,
-.carousel-thumbnail:focus-visible {
+.carousel-thumbnail:has(img):hover,
+.carousel-thumbnail:has(img):focus-visible {
      border-color: #2b3990;
-     transform: translateY(-2px);
      box-shadow: 0 22px 34px -24px rgba(43, 57, 144, 0.6);
      outline: none;
+}
+
+/* Thumbnails without an image - never show active, hover, or focus states */
+.carousel-thumbnail--empty,
+.carousel-thumbnail:not(:has(img)) {
+     pointer-events: none;
+     cursor: default;
+     background: #f8f9fa;
+     opacity: 0.6;
+     transition: none !important;
+     border-color: #e1e3e8;
+     box-shadow: 0 1px 2px 0 #0000000d;
+}
+
+.carousel-thumbnail--empty:hover,
+.carousel-thumbnail--empty:active,
+.carousel-thumbnail--empty:focus,
+.carousel-thumbnail--empty:focus-visible,
+.carousel-thumbnail--empty.is-active,
+.carousel-thumbnail:not(:has(img)):hover,
+.carousel-thumbnail:not(:has(img)):active,
+.carousel-thumbnail:not(:has(img)):focus,
+.carousel-thumbnail:not(:has(img)):focus-visible,
+.carousel-thumbnail:not(:has(img)).is-active {
+     pointer-events: none;
+     border-color: #e1e3e8;
+     background: #f8f9fa;
+     box-shadow: 0 1px 2px 0 #0000000d;
+     outline: none;
+     cursor: default;
+     opacity: 0.6;
+     transition: none !important;
 }
 
 .carousel-zoom-preview {
@@ -562,7 +614,7 @@ footer>* {
 .hero-copy {
      display: grid;
      align-content: center;
-     gap: 20px;
+     gap: 16px;
      padding-top: 24px;
 }
 
@@ -573,6 +625,32 @@ footer>* {
      margin: 0;
      padding: 0;
      list-style: none;
+}
+
+.hero-checklist {
+     display: grid;
+     gap: 24px;
+     margin: 0;
+     padding: 2px 0 6px;
+     list-style: none;
+}
+
+.hero-checklist__item {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     color: #111827;
+     font-family: "Inter", sans-serif;
+     font-size: 16px;
+     font-weight: 500;
+     line-height: 24px;
+     letter-spacing: 0;
+}
+
+.hero-checklist__item img {
+     width: 22px;
+     height: 22px;
+     flex: 0 0 22px;
 }
 
 .hero-badge {
@@ -716,6 +794,11 @@ footer>* {
 
      .hero-badge {
           font-size: 14px;
+     }
+
+     .hero-checklist__item {
+          font-size: 15px;
+          line-height: 22px;
      }
 
      .carousel-zoom-preview {
