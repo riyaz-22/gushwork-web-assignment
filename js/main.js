@@ -17,6 +17,12 @@
           setOpen(!dropdown.classList.contains('is-open'));
      });
 
+     menu.querySelectorAll('a').forEach((item) => {
+          item.addEventListener('click', () => {
+               setOpen(false);
+          });
+     });
+
      document.addEventListener('click', (event) => {
           if (!dropdown.contains(event.target)) {
                setOpen(false);

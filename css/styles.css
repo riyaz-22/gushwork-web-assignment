@@ -19,6 +19,10 @@ body {
      padding: 0;
 }
 
+html {
+     scroll-behavior: smooth;
+}
+
 body {
      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
      color: var(--text-color);
@@ -250,6 +254,7 @@ footer>* {
      display: block;
      padding: 10px 12px;
      border-radius: 10px;
+     white-space: nowrap;
 }
 
 .nav-dropdown__menu a:hover,
@@ -289,6 +294,12 @@ footer>* {
      font-weight: 500;
      line-height: 20px;
      letter-spacing: -0.006em;
+
+     &:hover,
+     &:focus-visible {
+          background: #0061E0;
+          outline: none;
+     }
 }
 
 .hero {
@@ -702,6 +713,62 @@ footer>* {
      line-height: 26px;
 }
 
+.product-info {
+     display: grid;
+     gap: 12px;
+     background-color: #ffffff;
+     padding: 16px 20px;
+     border: 1px solid #CFD1D4;
+     border-radius: 10px;
+}
+
+.product-info__label {
+     margin: 0;
+     color: #6A7077;
+     font-family: "Inter", sans-serif;
+     font-size: 14px;
+     font-weight: 500;
+     line-height: 20px;
+}
+
+.product-info__price {
+     margin: 0;
+     color: #0D0D0D;
+     font-family: "Inter", sans-serif;
+     font-size: 20px;
+     font-weight: 600;
+     line-height: 1.2;
+     letter-spacing: -0.02em;
+}
+
+.product-info__tags {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 10px;
+}
+
+.product-info__tag {
+     display: inline-flex;
+     align-items: center;
+     padding: 6px 14px;
+     border-radius: 6px;
+     font-family: "Inter", sans-serif;
+     font-size: 14px;
+     font-weight: 500;
+     line-height: 20px;
+}
+
+.product-info__tag--shipping,
+.product-info__tag--returns {
+     background: #FEF3C7;
+     color: #92400E;
+}
+
+.product-info__tag--cert {
+     background: #F3F4F6;
+     color: #0D0D0D;
+}
+
 .hero-actions {
      display: flex;
      align-items: center;
@@ -709,32 +776,83 @@ footer>* {
 }
 
 .btn-primary {
+     font-family: "Inter", sans-serif;
      width: fit-content;
      border: 0;
-     border-radius: 8px;
-     padding: 12px 18px;
-     background: #1d2d89;
+     border-radius: 12px;
+     padding: 16px 24px;
+     background: #2B3990;
      color: #ffffff;
      cursor: pointer;
+     font-size: 16px;
+     font-weight: 500;
+
+     &:hover,
+     &:focus-visible {
+          background: #0061E0;
+          outline: none;
+     }
 }
 
 .btn-secondary {
+     font-family: "Inter", sans-serif;
      display: inline-flex;
      align-items: center;
      justify-content: center;
+     gap: 10px;
      width: fit-content;
      min-height: 44px;
-     padding: 12px 18px;
-     border: 1px solid #cbd5e1;
-     border-radius: 10px;
+     padding: 16px 20px;
+     border: 1px solid #2B3990;
+     border-radius: 12px;
      color: #111827;
      text-decoration: none;
-     font-family: "Inter", sans-serif;
-     font-size: 14px;
+     font-size: 16px;
      font-weight: 500;
      line-height: 20px;
      letter-spacing: -0.006em;
-     background: rgba(255, 255, 255, 0.92);
+     background: transparent;
+
+     &:hover,
+     &:focus-visible {
+          background: #D8D8D9;
+     }
+}
+
+.btn-secondary__caret {
+     width: 8px;
+     height: 8px;
+     border-right: 1.5px solid currentColor;
+     border-bottom: 1.5px solid currentColor;
+     transform: rotate(-45deg);
+     flex: 0 0 auto;
+}
+
+.technical-specs-placeholder .container {
+     display: grid;
+     gap: 10px;
+     padding: 28px;
+     border: 1px dashed #cbd5e1;
+     border-radius: 12px;
+     background: rgba(255, 255, 255, 0.78);
+}
+
+.technical-specs-placeholder h2 {
+     margin: 0;
+     color: #111827;
+     font-family: "Urbanist", sans-serif;
+     font-size: 32px;
+     font-weight: 700;
+     line-height: 1.2;
+}
+
+.technical-specs-placeholder p {
+     margin: 0;
+     color: #4b5563;
+     font-family: "Inter", sans-serif;
+     font-size: 16px;
+     font-weight: 500;
+     line-height: 24px;
 }
 
 .footer p {
