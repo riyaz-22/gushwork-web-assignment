@@ -89,6 +89,25 @@
 
      const tabs = Array.from(tabsRoot.querySelectorAll('[data-manufacturing-tab]'));
 
+     const syncConnectorLine = () => {
+          const firstTab = tabs[0];
+          const lastTab = tabs[tabs.length - 1];
+
+          if (!firstTab || !lastTab) return;
+
+          const start = firstTab.offsetLeft + firstTab.offsetWidth / 2;
+          const end = lastTab.offsetLeft + lastTab.offsetWidth / 2;
+          tabsRoot.style.setProperty('--process-line-start', `${start}px`);
+          tabsRoot.style.setProperty('--process-line-width', `${Math.max(end - start, 0)}px`);
+     };
+
+     const queueConnectorSync = () => {
+          window.requestAnimationFrame(() => {
+               syncConnectorLine();
+               window.requestAnimationFrame(syncConnectorLine);
+          });
+     };
+
      const updateControls = () => {
           prevButton.disabled = activeIndex === 0;
           nextButton.disabled = activeIndex === PROCESS_STEPS.length - 1;
@@ -145,4 +164,15 @@
      });
 
      render(0, false);
+     queueConnectorSync();
+     window.addEventListener('resize', queueConnectorSync);
+     window.addEventListener('load', queueConnectorSync);
+
+     if (document.fonts?.ready) {
+          document.fonts.ready.then(queueConnectorSync);
+     }
+
+     if ('ResizeObserver' in window) {
+          new ResizeObserver(queueConnectorSync).observe(tabsRoot);
+     }
 })();

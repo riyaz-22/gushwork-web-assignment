@@ -45,19 +45,14 @@
 
      if (!viewport || !track) return;
 
-     const getInitials = (name) => {
-          const parts = name.trim().split(/\s+/).slice(0, 2);
-          return parts.map((part) => part.charAt(0).toUpperCase()).join('');
-     };
-
      track.innerHTML = TESTIMONIALS.map((item) => {
           return `
                <article class="testimonial-card">
-                    <p class="testimonial-card__quote" aria-hidden="true">&ldquo;</p>
+                    <img class="testimonial-card__quote" src="./assets/images/icons/icon-quote.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
                     <h3 class="testimonial-card__title">${item.title}</h3>
                     <p class="testimonial-card__description">${item.description}</p>
                     <footer class="testimonial-card__profile">
-                         <div class="testimonial-card__avatar" aria-hidden="true">${getInitials(item.name)}</div>
+                         <div class="testimonial-card__avatar" aria-hidden="true"></div>
                          <div class="testimonial-card__person">
                               <p class="testimonial-card__name">${item.name}</p>
                               <p class="testimonial-card__role">${item.role}</p>

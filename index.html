@@ -182,7 +182,7 @@
                               </div>
 
                               <div class="hero-actions">
-                                   <button class="btn-primary">
+                                   <button class="btn-primary" type="button" data-modal-mode="callback">
                                         Get Custom Quote
                                    </button>
                                    <a href="#technical-specs-placeholder" class="btn-secondary">
@@ -229,7 +229,7 @@
                     </div>
 
                     <div class="technical-specs__actions">
-                         <button class="technical-specs__download" type="button"
+                         <button class="technical-specs__download" type="button" data-modal-mode="brochure"
                               aria-label="Download Full Technical Datasheet">
                               <img class="technical-specs__download-icon"
                                    src="./assets/images/icons/icon-mini-download.png" alt="" aria-hidden="true"
@@ -253,7 +253,8 @@
                     <div class="built-to-last__grid" data-built-to-last-grid></div>
 
                     <div class="built-to-last__actions">
-                         <button class="built-to-last__cta btn-primary" type="button">Request a Quote</button>
+                         <button class="built-to-last__cta btn-primary" type="button" data-modal-mode="callback">Request
+                              a Quote</button>
                     </div>
                </div>
           </section>
@@ -498,41 +499,69 @@
      <!-- Modal: Download Technical Datasheet -->
      <div class="modal-overlay" id="datasheet-modal-overlay" hidden>
           <dialog class="modal" id="datasheet-modal" aria-labelledby="datasheet-modal-title">
-               <button class="modal__close" aria-label="Close modal" type="button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                         <line x1="18" y1="6" x2="6" y2="18"></line>
-                         <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-               </button>
-
                <div class="modal__content">
-                    <h2 id="datasheet-modal-title" class="modal__title">Let us email the entire catalogue to you</h2>
-                    
+                    <header class="modal__header">
+                         <h2 id="datasheet-modal-title" class="modal__title">Let us email the entire catalogue to you
+                         </h2>
+                         <button class="modal__close" aria-label="Close modal" type="button">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                   <line x1="18" y1="6" x2="6" y2="18"></line>
+                                   <line x1="6" y1="6" x2="18" y2="18"></line>
+                              </svg>
+                         </button>
+                    </header>
+
                     <form class="modal__form" id="datasheet-form">
-                         <div class="modal__form-group">
-                              <label for="modal-email" class="modal__label">Your Email <span aria-label="required">*</span></label>
-                              <input 
-                                   type="email" 
-                                   id="modal-email" 
-                                   name="email" 
-                                   class="modal__input" 
-                                   placeholder="example@gmail.com"
-                                   required
-                              />
+                         <div class="modal__form-group" data-modal-field="fullName" hidden>
+                              <label for="modal-full-name" class="modal__label">Full Name</label>
+                              <input type="text" id="modal-full-name" name="fullName" class="modal__input"
+                                   placeholder="Full Name" autocomplete="name" />
                          </div>
 
-                         <div class="modal__form-group">
+                         <div class="modal__form-group" data-modal-field="companyName" hidden>
+                              <label for="modal-company-name" class="modal__label">Company Name</label>
+                              <input type="text" id="modal-company-name" name="companyName" class="modal__input"
+                                   placeholder="Company Name" autocomplete="organization" />
+                         </div>
+
+                         <div class="modal__form-group" data-modal-field="callbackEmail" hidden>
+                              <label for="modal-callback-email" class="modal__label">Email Address</label>
+                              <input type="email" id="modal-callback-email" name="callbackEmail" class="modal__input"
+                                   placeholder="Email Address" autocomplete="email" />
+                         </div>
+
+                         <div class="modal__form-group" data-modal-field="phone" hidden>
+                              <label for="modal-phone" class="modal__label">Phone Number</label>
+                              <div class="modal__phone-row">
+                                   <select id="modal-country-code" name="countryCode" class="modal__country-code"
+                                        aria-label="Country code">
+                                        <option value="+91">+91</option>
+                                        <option value="+1">+1</option>
+                                        <option value="+44">+44</option>
+                                        <option value="+971">+971</option>
+                                   </select>
+                                   <input type="tel" id="modal-phone" name="phone" class="modal__input"
+                                        placeholder="7003026616" autocomplete="tel-national" inputmode="numeric" />
+                              </div>
+                         </div>
+
+                         <div class="modal__form-group" data-modal-field="brochureEmail">
+                              <label for="modal-email" class="modal__label">Your Email <span
+                                        aria-label="required">*</span></label>
+                              <input type="email" id="modal-email" name="email" class="modal__input"
+                                   placeholder="example@gmail.com" autocomplete="email" required />
+                         </div>
+
+                         <div class="modal__form-group" data-modal-field="brochureContact">
                               <label for="modal-contact" class="modal__label">Your Contact (Optional)</label>
-                              <input 
-                                   type="tel" 
-                                   id="modal-contact" 
-                                   name="contact" 
-                                   class="modal__input" 
-                                   placeholder="+91-0000000000"
-                              />
+                              <input type="tel" id="modal-contact" name="contact" class="modal__input"
+                                   placeholder="+91-0000000000" autocomplete="tel" />
                          </div>
 
-                         <button type="submit" class="modal__submit">Download Brochure</button>
+                         <footer class="modal__footer">
+                              <button type="submit" class="modal__submit" disabled>Download Brochure</button>
+                         </footer>
                     </form>
                </div>
           </dialog>
