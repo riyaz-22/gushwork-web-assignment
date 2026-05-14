@@ -32,7 +32,7 @@ body {
      background-color: var(--bg-color);
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 body.has-sticky-header {
@@ -316,7 +316,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .hero .container {
@@ -996,7 +996,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .built-to-last__container {
@@ -1106,7 +1106,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .faq-section__container {
@@ -1334,7 +1334,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .applications-section__container {
@@ -1385,8 +1385,8 @@ footer>* {
 
 .applications-section__control {
      position: static;
-     width: 44px;
-     height: 44px;
+     width: 64px;
+     height: 64px;
      transform: none;
      background: #ffffff;
      border: 1px solid #CFD1D4;
@@ -1500,7 +1500,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .manufacturing-process__container {
@@ -1730,7 +1730,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .resources-downloads__container {
@@ -1852,7 +1852,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .solutions-portfolio__container {
@@ -2058,7 +2058,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .trusted-performance__container {
@@ -2220,7 +2220,7 @@ footer>* {
      background-color: transparent;
      background-image: url("../assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
 }
 
 .contact-cta__container {
@@ -3303,7 +3303,7 @@ footer>* {
 .trusted-companies {
      background-color: transparent;
      background-repeat: repeat;
-     background-size: 320px 320px;
+     background-size: 256px 256px;
      padding-top: 100px;
 }
 
