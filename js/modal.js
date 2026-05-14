@@ -1,6 +1,4 @@
 (() => {
-     const brochureButtons = Array.from(document.querySelectorAll('[data-modal-mode="brochure"]'));
-     const quoteButtons = Array.from(document.querySelectorAll('[data-modal-mode="callback"]'));
      const modalOverlay = document.querySelector('#datasheet-modal-overlay');
      const modal = document.querySelector('#datasheet-modal');
      const modalTitle = document.querySelector('#datasheet-modal-title');
@@ -15,6 +13,7 @@
      const emailInput = document.querySelector('#modal-email');
      const contactInput = document.querySelector('#modal-contact');
      const submitButton = document.querySelector('.modal__submit');
+     const FIELD_ERROR_SELECTOR = '.modal__field-error';
      const MODAL_MODES = {
           brochure: {
                title: 'Let us email the entire catalogue to you',
@@ -38,6 +37,8 @@
 
      if (!modalOverlay || !modal || !modalTitle || !closeButton || !form || !submitButton || fieldGroups.length === 0) return;
 
+     form.setAttribute('novalidate', 'novalidate');
+
      const syncSubmitState = () => {
           if (currentMode === 'callback') {
                submitButton.disabled = false;
@@ -51,15 +52,84 @@
           return document.querySelector(`[data-modal-field="${name}"]`);
      };
 
+     const getOrCreateFieldError = (fieldName) => {
+          const group = getFieldGroup(fieldName);
+
+          if (!group) {
+               return null;
+          }
+
+          let errorElement = group.querySelector(FIELD_ERROR_SELECTOR);
+          if (!errorElement) {
+               errorElement = document.createElement('p');
+               errorElement.className = 'modal__field-error';
+               errorElement.setAttribute('aria-live', 'polite');
+               errorElement.hidden = true;
+               group.appendChild(errorElement);
+          }
+
+          return errorElement;
+     };
+
+     const setFieldError = (fieldName, message, controls = []) => {
+          const errorElement = getOrCreateFieldError(fieldName);
+
+          if (errorElement) {
+               errorElement.textContent = message;
+               errorElement.hidden = false;
+          }
+
+          controls.forEach((control) => {
+               if (!control) return;
+               control.classList.add('is-error');
+               control.setAttribute('aria-invalid', 'true');
+          });
+     };
+
+     const clearFieldError = (fieldName, controls = []) => {
+          const group = getFieldGroup(fieldName);
+          const errorElement = group?.querySelector(FIELD_ERROR_SELECTOR);
+
+          if (errorElement) {
+               errorElement.textContent = '';
+               errorElement.hidden = true;
+          }
+
+          controls.forEach((control) => {
+               if (!control) return;
+               control.classList.remove('is-error');
+               control.removeAttribute('aria-invalid');
+          });
+     };
+
+     const clearAllFieldErrors = () => {
+          clearFieldError('brochureEmail', [emailInput]);
+          clearFieldError('brochureContact', [contactInput]);
+          clearFieldError('fullName', [fullNameInput]);
+          clearFieldError('companyName', [companyNameInput]);
+          clearFieldError('callbackEmail', [callbackEmailInput]);
+          clearFieldError('phone', [countryCodeInput, phoneInput]);
+     };
+
      const setModeFieldVisibility = (visibleFields) => {
           fieldGroups.forEach((group) => {
                const isVisible = visibleFields.includes(group.dataset.modalField);
                group.hidden = !isVisible;
+
+               const controls = group.querySelectorAll('input, select, textarea, button');
+               controls.forEach((control) => {
+                    control.disabled = !isVisible;
+               });
+
+               if (!isVisible && group.dataset.modalField) {
+                    clearFieldError(group.dataset.modalField, Array.from(controls));
+               }
           });
      };
 
      const resetFormState = () => {
           form.reset();
+          clearAllFieldErrors();
           if (countryCodeInput) {
                countryCodeInput.value = '+91';
           }
@@ -89,20 +159,21 @@
           const email = emailInput?.value.trim() || '';
           const contact = contactInput?.value.trim() || '';
 
+          clearAllFieldErrors();
+
           if (!email) {
-               alert('Please enter your email address');
+               setFieldError('brochureEmail', 'Please enter your email address', [emailInput]);
                emailInput?.focus();
                return;
           }
 
           if (!validateEmail(email)) {
-               alert('Please enter a valid email address');
+               setFieldError('brochureEmail', 'Please enter a valid email address', [emailInput]);
                emailInput?.focus();
                return;
           }
 
           console.log('Download request:', { email, contact });
-          triggerBrochureDownload();
           alert(`Thank you! The datasheet will be sent to ${email}`);
           closeModal();
      };
@@ -114,50 +185,52 @@
           const phone = phoneInput?.value.trim() || '';
           const countryCode = countryCodeInput?.value || '+91';
 
+          clearAllFieldErrors();
+
           if (!fullName) {
-               alert('Please enter your full name');
+               setFieldError('fullName', 'Please enter your full name', [fullNameInput]);
                fullNameInput?.focus();
                return;
           }
 
           if (fullName.length < 2) {
-               alert('Please enter your full name');
+               setFieldError('fullName', 'Please enter your full name', [fullNameInput]);
                fullNameInput?.focus();
                return;
           }
 
           if (!companyName) {
-               alert('Please enter your company name');
+               setFieldError('companyName', 'Please enter your company name', [companyNameInput]);
                companyNameInput?.focus();
                return;
           }
 
           if (companyName.length < 2) {
-               alert('Please enter your company name');
+               setFieldError('companyName', 'Please enter your company name', [companyNameInput]);
                companyNameInput?.focus();
                return;
           }
 
           if (!callbackEmail) {
-               alert('Please enter your email address');
+               setFieldError('callbackEmail', 'Please enter your email address', [callbackEmailInput]);
                callbackEmailInput?.focus();
                return;
           }
 
           if (!validateEmail(callbackEmail)) {
-               alert('Please enter a valid email address');
+               setFieldError('callbackEmail', 'Please enter a valid email address', [callbackEmailInput]);
                callbackEmailInput?.focus();
                return;
           }
 
           if (!phone) {
-               alert('Please enter your phone number');
+               setFieldError('phone', 'Please enter your phone number', [countryCodeInput, phoneInput]);
                phoneInput?.focus();
                return;
           }
 
           if (!validatePhone(phone)) {
-               alert('Please enter a valid phone number');
+               setFieldError('phone', 'Please enter a valid phone number', [countryCodeInput, phoneInput]);
                phoneInput?.focus();
                return;
           }
@@ -169,35 +242,8 @@
                phone: `${countryCode} ${phone}`,
           });
 
-          alert('Thank you! Our team will call you shortly.');
+          alert('Your request has been submitted successfully. Our team will call you shortly.');
           closeModal();
-     };
-
-     const buildBrochureBlob = () => {
-          const placeholder = [
-               '%PDF-1.1',
-               '1 0 obj<</Title(Mangalam Pipes Brochure)>>endobj',
-               'trailer<</Root 1 0 R>>',
-               '%%EOF',
-          ].join('\n');
-
-          return new Blob([placeholder], { type: 'application/pdf' });
-     };
-
-     const triggerBrochureDownload = () => {
-          const brochureBlob = buildBrochureBlob();
-          const brochureUrl = URL.createObjectURL(brochureBlob);
-          const brochureLink = document.createElement('a');
-
-          brochureLink.href = brochureUrl;
-          brochureLink.download = 'mangalam-pipes-brochure.pdf';
-          document.body.appendChild(brochureLink);
-          brochureLink.click();
-          document.body.removeChild(brochureLink);
-
-          window.setTimeout(() => {
-               URL.revokeObjectURL(brochureUrl);
-          }, 500);
      };
 
      const focusWithoutScroll = (element) => {
@@ -260,8 +306,8 @@
           }
      };
 
-     const openModalFromTrigger = (event) => {
-          if (!event.isTrusted || event.defaultPrevented || (modal.open && !isClosing)) {
+     const openModalFromTrigger = (event, triggerElement = event.currentTarget) => {
+          if (!triggerElement || (modal.open && !isClosing)) {
                event.preventDefault();
                return;
           }
@@ -276,8 +322,8 @@
 
           window.clearTimeout(closeTimer);
           isClosing = false;
-          lastFocusedElement = event.currentTarget;
-          setModalMode(event.currentTarget?.dataset.modalMode || 'brochure');
+          lastFocusedElement = triggerElement;
+          setModalMode(triggerElement.dataset.modalMode || 'brochure');
           modalOverlay.dataset.state = 'open';
           modalOverlay.removeAttribute('hidden');
           setScrollLock(true);
@@ -290,17 +336,31 @@
           });
      };
 
-     brochureButtons.forEach((button) => {
-          button.addEventListener('click', openModalFromTrigger);
-     });
+     document.addEventListener('click', (event) => {
+          const triggerElement = event.target.closest('[data-modal-mode]');
 
-     quoteButtons.forEach((button) => {
-          button.addEventListener('click', openModalFromTrigger);
+          if (!triggerElement) {
+               return;
+          }
+
+          const mode = triggerElement.dataset.modalMode;
+          if (mode !== 'brochure' && mode !== 'callback') {
+               return;
+          }
+
+          openModalFromTrigger(event, triggerElement);
      });
 
      setModalMode('brochure');
      syncSubmitState();
      emailInput?.addEventListener('input', syncSubmitState);
+     emailInput?.addEventListener('input', () => clearFieldError('brochureEmail', [emailInput]));
+     contactInput?.addEventListener('input', () => clearFieldError('brochureContact', [contactInput]));
+     fullNameInput?.addEventListener('input', () => clearFieldError('fullName', [fullNameInput]));
+     companyNameInput?.addEventListener('input', () => clearFieldError('companyName', [companyNameInput]));
+     callbackEmailInput?.addEventListener('input', () => clearFieldError('callbackEmail', [callbackEmailInput]));
+     phoneInput?.addEventListener('input', () => clearFieldError('phone', [countryCodeInput, phoneInput]));
+     countryCodeInput?.addEventListener('change', () => clearFieldError('phone', [countryCodeInput, phoneInput]));
 
      const finishClose = () => {
           if (modal.open) {
