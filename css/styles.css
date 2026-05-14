@@ -111,6 +111,7 @@ footer>* {
 
 .header {
      background: #ffffff;
+     border-bottom: 1px solid #E1E3E8;
      padding: 24px var(--fold-padding-x);
 }
 
@@ -1072,7 +1073,7 @@ footer>* {
 .built-to-last__card-title {
      margin: 0;
      color: #0D0D0D;
-     font-family: "Inter", sans-serif;
+     font-family: "Urbanist", sans-serif;
      font-size: 20px;
      font-weight: 600;
      line-height: 1.4;
@@ -1237,8 +1238,8 @@ footer>* {
      margin: 0;
      color: #111827;
      font-family: "Urbanist", sans-serif;
-     font-size: clamp(28px, 2.5vw, 40px);
-     font-weight: 700;
+     font-size: 26px;
+     font-weight: 600;
      line-height: 1.12;
      letter-spacing: -0.02em;
 }
@@ -1256,6 +1257,10 @@ footer>* {
      display: grid;
      gap: 8px;
      justify-items: stretch;
+     width: min(100%, 360px);
+     max-width: 360px;
+     height: 92px;
+     justify-self: end;
 }
 
 .faq-catalogue__form input {
@@ -1297,6 +1302,11 @@ footer>* {
      min-height: 38px;
      padding-block: 0;
      border-radius: 8px;
+}
+
+.faq-catalogue__form input,
+.faq-catalogue__submit {
+     max-width: 360px;
 }
 
 .faq-catalogue__message {
