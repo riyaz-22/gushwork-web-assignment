@@ -114,9 +114,21 @@
           const phone = phoneInput?.value.trim() || '';
           const countryCode = countryCodeInput?.value || '+91';
 
+          if (!fullName) {
+               alert('Please enter your full name');
+               fullNameInput?.focus();
+               return;
+          }
+
           if (fullName.length < 2) {
                alert('Please enter your full name');
                fullNameInput?.focus();
+               return;
+          }
+
+          if (!companyName) {
+               alert('Please enter your company name');
+               companyNameInput?.focus();
                return;
           }
 
@@ -126,9 +138,21 @@
                return;
           }
 
+          if (!callbackEmail) {
+               alert('Please enter your email address');
+               callbackEmailInput?.focus();
+               return;
+          }
+
           if (!validateEmail(callbackEmail)) {
                alert('Please enter a valid email address');
                callbackEmailInput?.focus();
+               return;
+          }
+
+          if (!phone) {
+               alert('Please enter your phone number');
+               phoneInput?.focus();
                return;
           }
 
