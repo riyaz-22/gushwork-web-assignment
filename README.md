@@ -10,7 +10,7 @@ This project implements a product-focused marketing page based on the provided F
 
 - `index.html` - Main page markup
 - `styles.css` - Main stylesheet
-- `script.js` - Single JavaScript entrypoint
+- `script.js` - Bundled JavaScript file containing all client-side behavior
 - `assets/` - Images, icons, logos, and fonts used by the page
 
 ## Features
@@ -28,22 +28,6 @@ This project implements a product-focused marketing page based on the provided F
 .
 |-- assets/
 |-- index.html
-|-- js/
-|   |-- applications.js
-|   |-- built-to-last.js
-|   |-- carousel.js
-|   |-- contact-cta.js
-|   |-- faq.js
-|   |-- footer.js
-|   |-- header.js
-|   |-- main.js
-|   |-- manufacturing-process.js
-|   |-- modal.js
-|   |-- resources-downloads.js
-|   |-- solutions-portfolio.js
-|   |-- technical-specs.js
-|   |-- testimonials.js
-|   `-- trusted-companies.js
 |-- README.md
 |-- script.js
 `-- styles.css
@@ -53,10 +37,9 @@ This project implements a product-focused marketing page based on the provided F
 
 1. Clone or download the repository.
 2. Open `index.html` directly in a browser, or serve the folder with any simple static file server.
-3. Ensure the `assets/` and `js/` folders remain alongside `index.html`.
+3. Ensure the `assets/` folder remains alongside `index.html`.
 
 ## Notes
 
-- The root `script.js` file is the single entrypoint requested for submission.
-- Feature-specific behavior remains organized inside the `js/` folder and is loaded in sequence by the entry script.
+- The root `script.js` file is the single bundled entrypoint requested for submission.
 - The root `styles.css` file contains the active page styles used by the submission.
