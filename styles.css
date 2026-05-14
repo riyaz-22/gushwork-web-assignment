@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Urbanist:wght@700&display=swap');
-
 * {
      box-sizing: border-box;
 }
@@ -30,7 +28,7 @@ body {
      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
      color: var(--text-color);
      background-color: var(--bg-color);
-     background-image: url("../assets/images/backgrounds/section-noise-bg.png");
+     background-image: url("./assets/images/backgrounds/section-noise-bg.png");
      background-repeat: repeat;
      background-size: 256px 256px;
 }
@@ -4005,7 +4003,7 @@ body.modal-open {
      }
 
      .modal__title {
-          font-size: 28px;
+          font-size: 16px;
      }
 
      .modal__header {

@@ -6,6 +6,10 @@ Responsive product landing page built with vanilla HTML, CSS, and JavaScript.
 
 This project implements a product-focused marketing page based on the provided Figma specification. The page is built without frameworks or external UI libraries and focuses on responsive layout behavior, a sticky header, and an interactive image carousel with zoom support.
 
+## Live URL
+
+- https://riyaz-22.github.io/gushwork-web-assignment/
+
 ## Submission Files
 
 - `index.html` - Main page markup
